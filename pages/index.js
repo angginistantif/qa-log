@@ -32,6 +32,9 @@ const Home = () => {
 
     getCaseAIXP() 
     getCaseQD()
+    getCaseQA()
+    getCaseQC()
+    getCaseQP()
     });
 
     async function getCaseAIXP() {
@@ -42,7 +45,6 @@ const Home = () => {
           headers: {
             accept: 'application/json',
             Token: 'ba1c4140e10dc91ff6ae80dc6497f5061cb9608f',
-            'Access-Control-Allow-Origin':'*'
           },
         })
         const res = await response.json();
@@ -104,10 +106,10 @@ const Home = () => {
         console.log(err);
       }
     }
-/*
-    async function getAIXPAutomation() {
+
+    async function getCaseQA() {
       try {
-        const response = await fetch('https://api.qase.io/v1/case/AIXP?automation=automated&limit=10&offset=0', {
+        const response = await fetch('https://api.qase.io/v1/case/QA?automation=automated&limit=10&offset=0', {
           method: 'GET',
           mode: 'cors',
           headers: {
@@ -116,13 +118,100 @@ const Home = () => {
             'Access-Control-Allow-Origin':'*'
           },
         })
-        //setCasesAIXP(response.result.total);
-        console.log(response.result.filtered + "ini berapa")
-        setCasesAIXPAuto(response.result.filtered);
+        const res = await response.json();
+        setCasesQA(res.result.total);
+        setCasesQAAuto(res.result.filtered);
       } catch (err) {
         console.log(err);
       }
-    }*/
+
+      try {
+        const response = await fetch('https://api.qase.io/v1/suite/QA?limit=10&offset=0', {
+          method: 'GET',
+          mode: 'cors',
+          headers: {
+            accept: 'application/json',
+            Token: 'ba1c4140e10dc91ff6ae80dc6497f5061cb9608f',
+            'Access-Control-Allow-Origin':'*'
+          },
+        })
+        const res = await response.json();
+        setSuitesQA(res.result.total)
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    async function getCaseQC() {
+      try {
+        const response = await fetch('https://api.qase.io/v1/case/QC?automation=automated&limit=10&offset=0', {
+          method: 'GET',
+          mode: 'cors',
+          headers: {
+            accept: 'application/json',
+            Token: 'ba1c4140e10dc91ff6ae80dc6497f5061cb9608f',
+            'Access-Control-Allow-Origin':'*'
+          },
+        })
+        const res = await response.json();
+        setCasesQC(res.result.total);
+        setCasesQCAuto(res.result.filtered);
+      } catch (err) {
+        console.log(err);
+      }
+
+      try {
+        const response = await fetch('https://api.qase.io/v1/suite/QC?limit=10&offset=0', {
+          method: 'GET',
+          mode: 'cors',
+          headers: {
+            accept: 'application/json',
+            Token: 'ba1c4140e10dc91ff6ae80dc6497f5061cb9608f',
+            'Access-Control-Allow-Origin':'*'
+          },
+        })
+        const res = await response.json();
+        setSuitesQC(res.result.total)
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    async function getCaseQP() {
+      try {
+        const response = await fetch('https://api.qase.io/v1/case/QP?automation=automated&limit=10&offset=0', {
+          method: 'GET',
+          mode: 'cors',
+          headers: {
+            accept: 'application/json',
+            Token: 'ba1c4140e10dc91ff6ae80dc6497f5061cb9608f',
+            'Access-Control-Allow-Origin':'*'
+          },
+        })
+        const res = await response.json();
+        setCasesQP(res.result.total);
+        setCasesQPAuto(res.result.filtered);
+      } catch (err) {
+        console.log(err);
+      }
+
+      try {
+        const response = await fetch('https://api.qase.io/v1/suite/QP?limit=10&offset=0', {
+          method: 'GET',
+          mode: 'cors',
+          headers: {
+            accept: 'application/json',
+            Token: 'ba1c4140e10dc91ff6ae80dc6497f5061cb9608f',
+            'Access-Control-Allow-Origin':'*'
+          },
+        })
+        const res = await response.json();
+        setSuitesQP(res.result.total)
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
   return (
     <div>
       <Head>
@@ -181,6 +270,74 @@ const Home = () => {
     </Table.Body>
   </Table>
 
+  <Table celled>
+    <Table.Header>
+      <Table.Row>
+        <Table.HeaderCell colSpan='2'>Qore App</Table.HeaderCell>
+      </Table.Row>
+    </Table.Header>
+
+    <Table.Body>
+      <Table.Row>
+        <Table.Cell>Test Group Total</Table.Cell>
+        <Table.Cell>{suitesQA}</Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Cell>Test Case Total</Table.Cell>
+        <Table.Cell>{casesQA}</Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Cell>Test Case Automated</Table.Cell>
+        <Table.Cell>{casesQAAuto}</Table.Cell>
+      </Table.Row>
+    </Table.Body>
+  </Table>
+
+  <Table celled>
+    <Table.Header>
+      <Table.Row>
+        <Table.HeaderCell colSpan='2'>Qore Console</Table.HeaderCell>
+      </Table.Row>
+    </Table.Header>
+
+    <Table.Body>
+      <Table.Row>
+        <Table.Cell>Test Group Total</Table.Cell>
+        <Table.Cell>{suitesQC}</Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Cell>Test Case Total</Table.Cell>
+        <Table.Cell>{casesQC}</Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Cell>Test Case Automated</Table.Cell>
+        <Table.Cell>{casesQCAuto}</Table.Cell>
+      </Table.Row>
+    </Table.Body>
+  </Table>
+
+  <Table celled>
+    <Table.Header>
+      <Table.Row>
+        <Table.HeaderCell colSpan='2'>Qore Pipeline</Table.HeaderCell>
+      </Table.Row>
+    </Table.Header>
+
+    <Table.Body>
+      <Table.Row>
+        <Table.Cell>Test Group Total</Table.Cell>
+        <Table.Cell>{suitesQP}</Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Cell>Test Case Total</Table.Cell>
+        <Table.Cell>{casesQP}</Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Cell>Test Case Automated</Table.Cell>
+        <Table.Cell>{casesQPAuto}</Table.Cell>
+      </Table.Row>
+    </Table.Body>
+  </Table>
     </div>
   )
 }

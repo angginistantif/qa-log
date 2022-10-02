@@ -231,7 +231,7 @@ const Home = () => {
 
     <Table.Body>
       <Table.Row>
-        <Table.Cell>Test Group Total</Table.Cell>
+        <Table.Cell>Test Suite Total</Table.Cell>
         <Table.Cell>{suitesAIXP}</Table.Cell>
       </Table.Row>
       <Table.Row>
@@ -256,7 +256,7 @@ const Home = () => {
 
     <Table.Body>
       <Table.Row>
-        <Table.Cell>Test Group Total</Table.Cell>
+        <Table.Cell>Test Suite Total</Table.Cell>
         <Table.Cell>{suitesQD}</Table.Cell>
       </Table.Row>
       <Table.Row>
@@ -279,7 +279,7 @@ const Home = () => {
 
     <Table.Body>
       <Table.Row>
-        <Table.Cell>Test Group Total</Table.Cell>
+        <Table.Cell>Test Suite Total</Table.Cell>
         <Table.Cell>{suitesQA}</Table.Cell>
       </Table.Row>
       <Table.Row>
@@ -302,7 +302,7 @@ const Home = () => {
 
     <Table.Body>
       <Table.Row>
-        <Table.Cell>Test Group Total</Table.Cell>
+        <Table.Cell>Test Suite Total</Table.Cell>
         <Table.Cell>{suitesQC}</Table.Cell>
       </Table.Row>
       <Table.Row>
@@ -325,7 +325,7 @@ const Home = () => {
 
     <Table.Body>
       <Table.Row>
-        <Table.Cell>Test Group Total</Table.Cell>
+        <Table.Cell>Test Suite Total</Table.Cell>
         <Table.Cell>{suitesQP}</Table.Cell>
       </Table.Row>
       <Table.Row>

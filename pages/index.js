@@ -12,24 +12,21 @@ const Home = () => {
 
   const [casesAIXP, setCasesAIXP] = useState(0);
   const [casesAIXPAuto, setCasesAIXPAuto] = useState(0);
-  const [suitesAIXP, setSuitesAIXP] = useState(0);
+  const [casesAIXPSkip, setCasesAIXPSkip] = useState(0);
   const [casesQD, setCasesQD] = useState(0);
-  const [suitesQD, setSuitesQD] = useState(0);
+  const [casesQDSkip, setCasesQDSkip] = useState(0);
   const [casesQA, setCasesQA] = useState(0);
-  const [suitesQA, setSuitesQA] = useState(0);
+  const [casesQASkip, setCasesQASkip] = useState(0);
   const [casesQC, setCasesQC] = useState(0);
-  const [suitesQC, setSuitesQC] = useState(0);
+  const [casesQCSkip, setCasesQCSkip] = useState(0);
   const [casesQP, setCasesQP] = useState(0);
-  const [suitesQP, setSuitesQP] = useState(0);
+  const [casesQPSkip, setCasesQPSkip] = useState(0);
   const [casesQDAuto, setCasesQDAuto] = useState(0);
   const [casesQAAuto, setCasesQAAuto] = useState(0);
   const [casesQCAuto, setCasesQCAuto] = useState(0);
   const [casesQPAuto, setCasesQPAuto] = useState(0);
 
   useEffect(() => {
-    // ✅ Works
-
-
     getCaseAIXP() 
     getCaseQD()
     getCaseQA()
@@ -55,7 +52,7 @@ const Home = () => {
       }
 
       try {
-        const response = await fetch('https://api.qase.io/v1/suite/AIXP?limit=10&offset=0', {
+        const response = await fetch('https://api.qase.io/v1/case/AIXP?automation=is-not-automated&limit=10&offset=0', {
           method: 'GET',
           mode: 'cors',
           headers: {
@@ -65,7 +62,7 @@ const Home = () => {
           },
         })
         const res = await response.json();
-        setSuitesAIXP(res.result.total)
+        setCasesAIXPSkip(res.result.filtered)
       } catch (err) {
         console.log(err);
       }
@@ -91,7 +88,7 @@ const Home = () => {
       }
 
       try {
-        const response = await fetch('https://api.qase.io/v1/suite/QD?limit=10&offset=0', {
+        const response = await fetch('https://api.qase.io/v1/case/QD?automation=is-not-automated&limit=10&offset=0', {
           method: 'GET',
           mode: 'cors',
           headers: {
@@ -101,7 +98,7 @@ const Home = () => {
           },
         })
         const res = await response.json();
-        setSuitesQD(res.result.total)
+        setCasesQDSkip(res.result.filtered)
       } catch (err) {
         console.log(err);
       }
@@ -126,7 +123,7 @@ const Home = () => {
       }
 
       try {
-        const response = await fetch('https://api.qase.io/v1/suite/QA?limit=10&offset=0', {
+        const response = await fetch('https://api.qase.io/v1/case/QA?automation=is-not-automated&limit=10&offset=0', {
           method: 'GET',
           mode: 'cors',
           headers: {
@@ -136,7 +133,7 @@ const Home = () => {
           },
         })
         const res = await response.json();
-        setSuitesQA(res.result.total)
+        setCasesQASkip(res.result.filtered)
       } catch (err) {
         console.log(err);
       }
@@ -161,7 +158,7 @@ const Home = () => {
       }
 
       try {
-        const response = await fetch('https://api.qase.io/v1/suite/QC?limit=10&offset=0', {
+        const response = await fetch('https://api.qase.io/v1/case/QC?automation=%20is-not-automated&limit=10&offset=0', {
           method: 'GET',
           mode: 'cors',
           headers: {
@@ -171,7 +168,7 @@ const Home = () => {
           },
         })
         const res = await response.json();
-        setSuitesQC(res.result.total)
+        setCasesQCSkip(res.result.count)
       } catch (err) {
         console.log(err);
       }
@@ -196,7 +193,7 @@ const Home = () => {
       }
 
       try {
-        const response = await fetch('https://api.qase.io/v1/suite/QP?limit=10&offset=0', {
+        const response = await fetch('https://api.qase.io/v1/case/QP?automation=is-not-automated&limit=10&offset=0', {
           method: 'GET',
           mode: 'cors',
           headers: {
@@ -206,7 +203,7 @@ const Home = () => {
           },
         })
         const res = await response.json();
-        setSuitesQP(res.result.total)
+        setCasesQPSkip(res.result.filtered)
       } catch (err) {
         console.log(err);
       }
@@ -231,16 +228,16 @@ const Home = () => {
 
     <Table.Body>
       <Table.Row>
-        <Table.Cell>Test Suite Total</Table.Cell>
-        <Table.Cell>{suitesAIXP}</Table.Cell>
-      </Table.Row>
-      <Table.Row>
         <Table.Cell>Test Case Total</Table.Cell>
         <Table.Cell>{casesAIXP}</Table.Cell>
       </Table.Row>
       <Table.Row>
         <Table.Cell>Test Case Automated</Table.Cell>
         <Table.Cell>{casesAIXPAuto}</Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Cell>Test Cases Skip*</Table.Cell>
+        <Table.Cell>{casesAIXPSkip}</Table.Cell>
       </Table.Row>
     </Table.Body>
   </Table>
@@ -256,10 +253,6 @@ const Home = () => {
 
     <Table.Body>
       <Table.Row>
-        <Table.Cell>Test Suite Total</Table.Cell>
-        <Table.Cell>{suitesQD}</Table.Cell>
-      </Table.Row>
-      <Table.Row>
         <Table.Cell>Test Case Total</Table.Cell>
         <Table.Cell>{casesQD}</Table.Cell>
       </Table.Row>
@@ -267,8 +260,14 @@ const Home = () => {
         <Table.Cell>Test Case Automated</Table.Cell>
         <Table.Cell>{casesQDAuto}</Table.Cell>
       </Table.Row>
+      <Table.Row>
+        <Table.Cell>Test Cases Skip*</Table.Cell>
+        <Table.Cell>{casesQDSkip}</Table.Cell>
+      </Table.Row>
     </Table.Body>
   </Table>
+
+  <br/>
 
   <Table celled>
     <Table.Header>
@@ -279,10 +278,6 @@ const Home = () => {
 
     <Table.Body>
       <Table.Row>
-        <Table.Cell>Test Suite Total</Table.Cell>
-        <Table.Cell>{suitesQA}</Table.Cell>
-      </Table.Row>
-      <Table.Row>
         <Table.Cell>Test Case Total</Table.Cell>
         <Table.Cell>{casesQA}</Table.Cell>
       </Table.Row>
@@ -290,8 +285,14 @@ const Home = () => {
         <Table.Cell>Test Case Automated</Table.Cell>
         <Table.Cell>{casesQAAuto}</Table.Cell>
       </Table.Row>
+      <Table.Row>
+        <Table.Cell>Test Cases Skip*</Table.Cell>
+        <Table.Cell>{casesQASkip}</Table.Cell>
+      </Table.Row>
     </Table.Body>
   </Table>
+
+  <br/>
 
   <Table celled>
     <Table.Header>
@@ -302,10 +303,6 @@ const Home = () => {
 
     <Table.Body>
       <Table.Row>
-        <Table.Cell>Test Suite Total</Table.Cell>
-        <Table.Cell>{suitesQC}</Table.Cell>
-      </Table.Row>
-      <Table.Row>
         <Table.Cell>Test Case Total</Table.Cell>
         <Table.Cell>{casesQC}</Table.Cell>
       </Table.Row>
@@ -313,8 +310,14 @@ const Home = () => {
         <Table.Cell>Test Case Automated</Table.Cell>
         <Table.Cell>{casesQCAuto}</Table.Cell>
       </Table.Row>
+      <Table.Row>
+        <Table.Cell>Test Case Skip*</Table.Cell>
+        <Table.Cell>{casesQCSkip}</Table.Cell>
+      </Table.Row>
     </Table.Body>
   </Table>
+
+  <br/>
 
   <Table celled>
     <Table.Header>
@@ -325,16 +328,16 @@ const Home = () => {
 
     <Table.Body>
       <Table.Row>
-        <Table.Cell>Test Suite Total</Table.Cell>
-        <Table.Cell>{suitesQP}</Table.Cell>
-      </Table.Row>
-      <Table.Row>
         <Table.Cell>Test Case Total</Table.Cell>
         <Table.Cell>{casesQP}</Table.Cell>
       </Table.Row>
       <Table.Row>
         <Table.Cell>Test Case Automated</Table.Cell>
         <Table.Cell>{casesQPAuto}</Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Cell>Test Case Skip*</Table.Cell>
+        <Table.Cell>{casesQPSkip}</Table.Cell>
       </Table.Row>
     </Table.Body>
   </Table>

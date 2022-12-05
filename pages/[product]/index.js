@@ -22,7 +22,7 @@ const Home = () => {
       </Head>
       <MenuExamplePointing/>
       <br/>
-      <Header as='h1' textAlign='center' color="brown">{id.product.toUpperCase()} Test Case Log </Header>
+      <Header as='h1' textAlign='center' color="brown">{id.product} Test Case Log </Header>
       
 
 

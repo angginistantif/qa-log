@@ -24,7 +24,7 @@ const Home = () => {
       </Head>
       <MenuExamplePointing/>
       <br/>
-      <Header as='h1' textAlign='center' color="blue"> {id.product.toUpperCase()} Dashboard for Automation Test </Header>
+      <Header as='h1' textAlign='center' color="brown"> {id.product} Dashboard for Automation Test </Header>
 
 
     

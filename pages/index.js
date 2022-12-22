@@ -18,6 +18,9 @@ const Home = () => {
   const [casesQDSkip, setCasesQDSkip] = useState(0);
   const [casesQA, setCasesQA] = useState(0);
   const [casesQASkip, setCasesQASkip] = useState(0);
+
+  const [casesQOA, setCasesQOA] = useState(0);
+  const [casesQOASkip, setCasesQOASkip] = useState(0);
   const [casesQC, setCasesQC] = useState(0);
   const [casesQCSkip, setCasesQCSkip] = useState(0);
   const [casesQP, setCasesQP] = useState(0);
@@ -26,11 +29,13 @@ const Home = () => {
   const [casesQAAuto, setCasesQAAuto] = useState(0);
   const [casesQCAuto, setCasesQCAuto] = useState(0);
   const [casesQPAuto, setCasesQPAuto] = useState(0);
+  const [casesQOAAuto, setCasesOAAuto] = useState(0);
 
   useEffect(() => {
     getCaseAIXP() 
     getCaseQD()
     getCaseQA()
+    getCaseQOA()
     getCaseQC()
     getCaseQP()
     });
@@ -135,6 +140,41 @@ const Home = () => {
         })
         const res = await response.json();
         setCasesQASkip(res.result.filtered)
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    async function getCaseQOA() {
+      try {
+        const response = await fetch('https://api.qase.io/v1/case/QOA?automation=automated&limit=10&offset=0', {
+          method: 'GET',
+          mode: 'cors',
+          headers: {
+            accept: 'application/json',
+            Token: 'ba1c4140e10dc91ff6ae80dc6497f5061cb9608f',
+            'Access-Control-Allow-Origin':'*'
+          },
+        })
+        const res = await response.json();
+        setCasesQOA(res.result.total);
+        setCasesOAAuto(res.result.filtered);
+      } catch (err) {
+        console.log(err);
+      }
+
+      try {
+        const response = await fetch('https://api.qase.io/v1/case/QOA?automation=is-not-automated&limit=10&offset=0', {
+          method: 'GET',
+          mode: 'cors',
+          headers: {
+            accept: 'application/json',
+            Token: 'ba1c4140e10dc91ff6ae80dc6497f5061cb9608f',
+            'Access-Control-Allow-Origin':'*'
+          },
+        })
+        const res = await response.json();
+        setCasesQOASkip(res.result.filtered)
       } catch (err) {
         console.log(err);
       }
@@ -290,6 +330,31 @@ const Home = () => {
       <Table.Row>
         <Table.Cell>Test Cases Skip*</Table.Cell>
         <Table.Cell>{casesQASkip}</Table.Cell>
+      </Table.Row>
+    </Table.Body>
+  </Table>
+
+  <br/>
+
+  <Table celled>
+    <Table.Header>
+      <Table.Row>
+        <Table.HeaderCell colSpan='2'>Qore Output App</Table.HeaderCell>
+      </Table.Row>
+    </Table.Header>
+
+    <Table.Body>
+      <Table.Row>
+        <Table.Cell>Test Case Total</Table.Cell>
+        <Table.Cell>{casesQOA}</Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Cell>Test Case Automated</Table.Cell>
+        <Table.Cell>{casesQOAAuto}</Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Cell>Test Cases Skip*</Table.Cell>
+        <Table.Cell>{casesQOASkip}</Table.Cell>
       </Table.Row>
     </Table.Body>
   </Table>

@@ -14,38 +14,47 @@ const Home = () => {
   const [casesAIXP, setCasesAIXP] = useState(0);
   const [casesAIXPAuto, setCasesAIXPAuto] = useState(0);
   const [casesAIXPSkip, setCasesAIXPSkip] = useState(0);
+
   const [casesQD, setCasesQD] = useState(0);
+  const [casesQDAuto, setCasesQDAuto] = useState(0);
   const [casesQDSkip, setCasesQDSkip] = useState(0);
+
   const [casesQA, setCasesQA] = useState(0);
+  const [casesQAAuto, setCasesQAAuto] = useState(0);
   const [casesQASkip, setCasesQASkip] = useState(0);
 
   const [casesQOA, setCasesQOA] = useState(0);
   const [casesQOASkip, setCasesQOASkip] = useState(0);
+  const [casesQOAAuto, setCasesQOAAuto] = useState(0);
+
   const [casesQC, setCasesQC] = useState(0);
   const [casesQCSkip, setCasesQCSkip] = useState(0);
+  const [casesQCAuto, setCasesQCAuto] = useState(0);
+
   const [casesQP, setCasesQP] = useState(0);
   const [casesQPSkip, setCasesQPSkip] = useState(0);
-  const [casesQDAuto, setCasesQDAuto] = useState(0);
-  const [casesQAAuto, setCasesQAAuto] = useState(0);
-  const [casesQCAuto, setCasesQCAuto] = useState(0);
   const [casesQPAuto, setCasesQPAuto] = useState(0);
-  const [casesQOAAuto, setCasesOAAuto] = useState(0);
+
+  const [casesGR, setCasesGR] = useState(0);
+  const [casesGRAuto, setCasesGRAuto] = useState(0);
+  const [casesGRSKip, setCasesGRSkip] = useState(0);
 
   useEffect(() => {
     getCaseAIXP() 
     getCaseQD()
     getCaseQA()
     getCaseQOA()
+    getCaseGR()
     getCaseQC()
-    getCaseQP()
+    getCaseQP() 
     });
 
     async function getCaseAIXP() {
       try {
-        const response = await fetch('https://api.qase.io/v1/case/AIXP?automation=automated&limit=10&offset=0', {
+        const response = await fetch('https://try.readme.io/https://api.qase.io/v1/case/AIXP?limit=10&offset=0', {
           method: 'GET',
-          mode: 'cors',
           headers: {
+            mode: 'cors',
             accept: 'application/json',
             Token: 'ba1c4140e10dc91ff6ae80dc6497f5061cb9608f',
           },
@@ -58,13 +67,12 @@ const Home = () => {
       }
 
       try {
-        const response = await fetch('https://api.qase.io/v1/case/AIXP?automation=is-not-automated&limit=10&offset=0', {
+        const response = await fetch('https://try.readme.io/https://api.qase.io/v1/case/AIXP?automation=is-not-automated&limit=10&offset=0', {
           method: 'GET',
-          mode: 'cors',
           headers: {
+            mode: 'cors',
             accept: 'application/json',
             Token: 'ba1c4140e10dc91ff6ae80dc6497f5061cb9608f',
-            'Access-Control-Allow-Origin':'*'
           },
         })
         const res = await response.json();
@@ -74,10 +82,9 @@ const Home = () => {
       }
     }
 
-
     async function getCaseQD() {
       try {
-        const response = await fetch('https://api.qase.io/v1/case/QD?automation=automated&limit=10&offset=0', {
+        const response = await fetch('https://try.readme.io/https://api.qase.io/v1/case/QD?automation=automated&limit=10&offset=0', {
           method: 'GET',
           mode: 'cors',
           headers: {
@@ -94,7 +101,7 @@ const Home = () => {
       }
 
       try {
-        const response = await fetch('https://api.qase.io/v1/case/QD?automation=is-not-automated&limit=10&offset=0', {
+        const response = await fetch('https://try.readme.io/https://api.qase.io/v1/case/QD?automation=is-not-automated&limit=10&offset=0', {
           method: 'GET',
           mode: 'cors',
           headers: {
@@ -112,7 +119,7 @@ const Home = () => {
 
     async function getCaseQA() {
       try {
-        const response = await fetch('https://api.qase.io/v1/case/QA?automation=automated&limit=10&offset=0', {
+        const response = await fetch('https://try.readme.io/https://api.qase.io/v1/case/QA?automation=automated&limit=10&offset=0', {
           method: 'GET',
           mode: 'cors',
           headers: {
@@ -129,7 +136,7 @@ const Home = () => {
       }
 
       try {
-        const response = await fetch('https://api.qase.io/v1/case/QA?automation=is-not-automated&limit=10&offset=0', {
+        const response = await fetch('https://try.readme.io/https://api.qase.io/v1/case/QA?automation=is-not-automated&limit=10&offset=0', {
           method: 'GET',
           mode: 'cors',
           headers: {
@@ -147,7 +154,7 @@ const Home = () => {
 
     async function getCaseQOA() {
       try {
-        const response = await fetch('https://api.qase.io/v1/case/QOA?automation=automated&limit=10&offset=0', {
+        const response = await fetch('https://try.readme.io/https://api.qase.io/v1/case/QOA?automation=automated&limit=10&offset=0', {
           method: 'GET',
           mode: 'cors',
           headers: {
@@ -158,13 +165,13 @@ const Home = () => {
         })
         const res = await response.json();
         setCasesQOA(res.result.total);
-        setCasesOAAuto(res.result.filtered);
+        setCasesQOAAuto(res.result.filtered);
       } catch (err) {
         console.log(err);
       }
 
       try {
-        const response = await fetch('https://api.qase.io/v1/case/QOA?automation=is-not-automated&limit=10&offset=0', {
+        const response = await fetch('https://try.readme.io/https://api.qase.io/v1/case/QOA?automation=is-not-automated&limit=10&offset=0', {
           method: 'GET',
           mode: 'cors',
           headers: {
@@ -180,9 +187,46 @@ const Home = () => {
       }
     }
 
+    async function getCaseGR() {
+      try {
+        const response = await fetch('https://try.readme.io/https://api.qase.io/v1/case/GR?automation=automated&limit=10&offset=0', {
+          method: 'GET',
+          mode: 'cors',
+          headers: {
+            accept: 'application/json',
+            Token: 'ba1c4140e10dc91ff6ae80dc6497f5061cb9608f',
+            'Access-Control-Allow-Origin':'*'
+          },
+        })
+        const res = await response.json();
+        setCasesGR(res.result.total);
+        setCasesGRAuto(res.result.filtered);
+      } catch (err) {
+        console.log(err);
+      }
+
+      try {
+        const response = await fetch('https://try.readme.io/https://api.qase.io/v1/case/GR?automation=is-not-automated&limit=10&offset=0', {
+          method: 'GET',
+          mode: 'cors',
+          headers: {
+            accept: 'application/json',
+            Token: 'ba1c4140e10dc91ff6ae80dc6497f5061cb9608f',
+            'Access-Control-Allow-Origin':'*'
+          },
+        })
+        const res = await response.json();
+        setCasesGRSkip(res.result.filtered)
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+
+
     async function getCaseQC() {
       try {
-        const response = await fetch('https://api.qase.io/v1/case/QC?automation=automated&limit=10&offset=0', {
+        const response = await fetch('https://try.readme.io/https://api.qase.io/v1/case/QC?automation=automated&limit=10&offset=0', {
           method: 'GET',
           mode: 'cors',
           headers: {
@@ -199,7 +243,7 @@ const Home = () => {
       }
 
       try {
-        const response = await fetch('https://api.qase.io/v1/case/QC?automation=%20is-not-automated&limit=10&offset=0', {
+        const response = await fetch('https://try.readme.io/https://api.qase.io/v1/case/QC?automation=%20is-not-automated&limit=10&offset=0', {
           method: 'GET',
           mode: 'cors',
           headers: {
@@ -217,7 +261,7 @@ const Home = () => {
 
     async function getCaseQP() {
       try {
-        const response = await fetch('https://api.qase.io/v1/case/QP?automation=automated&limit=10&offset=0', {
+        const response = await fetch('https://try.readme.io/https://api.qase.io/v1/case/QP?automation=automated&limit=10&offset=0', {
           method: 'GET',
           mode: 'cors',
           headers: {
@@ -234,7 +278,7 @@ const Home = () => {
       }
 
       try {
-        const response = await fetch('https://api.qase.io/v1/case/QP?automation=is-not-automated&limit=10&offset=0', {
+        const response = await fetch('https://try.readme.io/https://api.qase.io/v1/case/QP?automation=is-not-automated&limit=10&offset=0', {
           method: 'GET',
           mode: 'cors',
           headers: {
@@ -255,7 +299,6 @@ const Home = () => {
       <Head>
         <title>QASE Test Case Log</title>
       </Head>
-      <MenuExamplePointing/>
       <br/>
         <Header as='h1' textAlign='center' color="brown">QASE Test Case Log </Header>
 
@@ -355,6 +398,31 @@ const Home = () => {
       <Table.Row>
         <Table.Cell>Test Cases Skip*</Table.Cell>
         <Table.Cell>{casesQOASkip}</Table.Cell>
+      </Table.Row>
+    </Table.Body>
+  </Table>
+
+  <br/>
+
+  <Table celled>
+    <Table.Header>
+      <Table.Row>
+        <Table.HeaderCell colSpan='2'>Qore Project - Ganara</Table.HeaderCell>
+      </Table.Row>
+    </Table.Header>
+
+    <Table.Body>
+      <Table.Row>
+        <Table.Cell>Test Case Total</Table.Cell>
+        <Table.Cell>{casesGR}</Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Cell>Test Case Automated</Table.Cell>
+        <Table.Cell>{casesGRAuto}</Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Cell>Test Cases Skip*</Table.Cell>
+        <Table.Cell>{casesGRSKip}</Table.Cell>
       </Table.Row>
     </Table.Body>
   </Table>
